@@ -14,6 +14,18 @@
 		<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
 		<title id="ttl">ForShare Information</title>
 		
+		<!-- Add to homescreen for Chrome on Android -->
+		<meta name="mobile-web-app-capable" content="yes">
+
+		<!-- Add to homescreen for Safari on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-title" content="Material Design Lite">
+
+		<!-- Tile icon for Win8 (144x144 + tile color) -->
+		<meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+		<meta name="msapplication-TileColor" content="#3372DF">
+		
 		<!-- Page styles -->
 		<link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -40,7 +52,7 @@
 	<body>
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<!-- Header -->
-			<div class="forshare-header mdl-layout__header mdl-layout__header--waterfall">
+			<header class="forshare-header mdl-layout__header mdl-layout__header--waterfall">
 				<div class="mdl-layout__header-row">
 					<span class="forshare-title mdl-layout-title">
 						<a href="index.php"><img class="forshare-logo-image" src="images/logo.png"></a>
@@ -112,7 +124,7 @@
 						<img class="forshare-logo-image" src="images/logo.png">
 					</span>
 				</div>
-			</div>
+			</header>
 			
 			<div class="forshare-drawer mdl-layout__drawer">
 				<span class="mdl-layout-title">
