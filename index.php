@@ -16,7 +16,6 @@
 	
 	$db->close();
 ?>				
-			<div class="forshare-content mdl-layout__content">
 				<div class="forshare-people-section mdl-typography--text-center">
 				<a name="people"></a>
 					<div class="logo-font forshare-slogan">Share everything for everyone</div>
@@ -129,7 +128,6 @@
 						</div>								
 					</div>
 				</div>
-				
 <?php
 	include('footer.php');
 ?>

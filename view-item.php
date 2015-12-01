@@ -16,9 +16,7 @@
 <?php 
 	include('header.php');
 ?>				
-	<div class="mdl-layout__content">
-		<div class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
-		<div class="main-content">
+	<div class="main-content mdl-color--grey-200 mdl-color-text--grey-700 mdl-base">
 		<!--Display posts-->
 		<?php
 		$query = "SELECT * FROM ITEMS";
@@ -41,6 +39,7 @@
 				{
 					$item_id = $post['item_id'];
 					$post_id = $post['post_id'];
+					$post_usr = $post['user_id'];
 					
 					$query = "SELECT * FROM ITEMS 
 					WHERE item_id = '$item_id'";
@@ -48,7 +47,12 @@
 					$iresult = mysql_query( $query );
 					$item = mysql_fetch_assoc($iresult);
 		?>
-			<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" name="item-<?php echo $item_id ?>">
+			<section class="section--center share-grid mdl-shadow--2dp" name="item-<?php echo $item_id ?>">
+				
+				<div class="mdl-grid mdl-grid--no-spacing">
+					<div class="mdl-card__actions" id="mdl-card_meta">
+						<a href="post.php?post_id=<?php echo $post['post_id'] ?>" class="mdl-button">Read more</a>
+					</div>
 				<header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
 					<?php
 						$query = "SELECT * FROM PICTURES 
@@ -59,7 +63,7 @@
 						if (mysql_num_rows($pic_list) != 0) {
 							while ($pic = mysql_fetch_assoc($pic_list)) {
 					?>
-						<img src="uploads/<?php echo $pic['pic_img'] ?>" style="width: 200px;">
+						<img class="mdl-shadow--2dp" src="uploads/<?php echo $pic['pic_img'] ?>" >
 					<?php
 							}
 						} else {
@@ -72,19 +76,14 @@
 				<div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
 					<div class="mdl-card__supporting-text">
 			<!--Content area-->
+			
+				<h4> <a href="post.php?post_id=<?php echo $post['post_id'] ?>"> <?php echo $post['title'] ?></a></h4>
 			<?php 
-				if ($user_type != 'admin')
-				{
-			?>
-								<!--<form name="remove-form" action="remove-item.php" method="POST">
-					<button onClick="return ConfirmDelete();" type="submit" name="remove" id="bt-remove" value="<?php echo $post['item_id'] ?>" ></button>
-				</form>-->
-			<?php
-				}
-			?>
-						<h4> <a href="post.php?post_id=<?php echo $post['post_id'] ?>"> <?php echo $post['title'] ?></a></h4>
-			<?php 
-						list($output)=explode("\n",wordwrap(strip_tags($item['item_desc']),100),1);
+						
+			
+						$output = explode(' ', $item['item_desc']);
+						array_splice($output, 30);
+						$output = implode(' ', $output)."...";
 						echo $output;
 			?>
 					</div>
@@ -92,14 +91,23 @@
 						<a href="post.php?post_id=<?php echo $post['post_id'] ?>" class="mdl-button">Read more</a>
 					</div>
 				</div>
-				<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
+				</div>
+				<?php
+				if ($user_id == $post_usr)
+				{
+				?>
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn<?php echo $post['post_id'] ?>">
 					<i class="material-icons">more_vert</i>
 				</button>
-				<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
-					<li class="mdl-menu__item">Lorem</li>
-					<li class="mdl-menu__item" disabled>Ipsum</li>
-					<li class="mdl-menu__item">Dolor</li>
-				</ul>
+				<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn<?php echo $post['post_id'] ?>">
+					<li class="mdl-menu__item" disabled>Edit</li>
+					<form name="remove-form" action="remove-item.php" method="POST">
+						<li class="mdl-menu__item" onClick="return ConfirmDelete();" type="submit" name="remove" value="<?php echo $post['item_id'] ?>">Remove <?php echo $post['item_id'] ?></li>
+					</form>
+				</ul>				
+				<?php
+					}
+				?>
 			</section>
 		<?php
 				}
@@ -107,8 +115,7 @@
 		}
 			$db->close();
 		?>
-		</div>
-		</div>
+	</div>
 <?php
 	include('footer.php');
 ?>

@@ -43,3 +43,4 @@
 	header("Location: view-item.php?remove_item=$item_id",true);	
 		
 	exit();
+?>

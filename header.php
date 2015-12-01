@@ -70,16 +70,8 @@
 					<div class="forshare-navigation-container">
 						<nav class="forshare-navigation mdl-navigation">
 							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.php">Home</a>
-							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="#" id="items-menu">Items</a>
-								<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-center mdl-js-ripple-effect" for="items-menu">
-									<li class="mdl-menu__item"><a class="mdl-typography--text-uppercase" href="view-item.php">Items List</a></li>
-									<li class="mdl-menu__item"><a class="mdl-typography--text-uppercase" href="add-item.php">Add Item</a></li>
-								</ul>
-							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="#" id="people-menu">People</a>
-								<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-center mdl-js-ripple-effect" for="people-menu">
-									<li class="mdl-menu__item"><a class="mdl-typography--text-uppercase" href="view-people.php">People List</a></li>
-									<li class="mdl-menu__item"><a class="mdl-typography--text-uppercase" href="add-people.php">Add People</a></li>
-								</ul>
+							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="view-item.php" id="items-menu">Items</a>
+							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="view-people.php" id="people-menu">People</a>
 							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Contact</a>
 							<!-- Sign In | Sign Up-->
 							<?php
@@ -109,12 +101,15 @@
 									
 									$db->close();
 							?>
-							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="dashboard.php?user_id=<?php echo $user_id ?>">
-								<?php
+							<button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="user-account">
+								<i class="material-icons item-icons">account_circle</i>
+							</button>
+								<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-center mdl-js-ripple-effect" for="user-account">
+									<li class="mdl-menu__item"><a href="dashboard.php?user_id=<?php echo $user_id ?>"><?php
 									echo $_SESSION['nickname']
-								?>
-							</a>
-							<a class="mdl-navigation__link mdl-typography--text-uppercase" href="logout.php">Logout</a>
+								?></a></li>
+									<li class="mdl-menu__item"><a href="logout.php">Logout</a></li>
+								</ul>
 							<?php
 								}
 							?>
@@ -153,6 +148,7 @@
 							
 							$db->close();
 					?>
+				
 					<a class="forshare-logo-image" href="dashboard.php?user_id=<?php echo $user_id ?>">
 						<?php
 							echo $_SESSION['nickname']
@@ -163,10 +159,11 @@
 					?>
 				</span>
 				<nav class="mdl-navigation">
-				  <a class="mdl-navigation__link" href="">Items</a>
-				  <a class="mdl-navigation__link" href="">People</a>
-				  <a class="mdl-navigation__link" href="">Contact</a>
-				  <div class="forshare-drawer-separator"></div>
+					<a class="mdl-navigation__link" href="index.php"><i class="material-icons item-icons">home</i> Home</a>
+					<a class="mdl-navigation__link" href="view-item.php"><i class="material-icons item-icons">local_offer</i> Items</a>
+					<a class="mdl-navigation__link" href="view-people.php"><i class="material-icons item-icons">group</i> People</a>
+					<a class="mdl-navigation__link" href=""><i class="material-icons item-icons">feedback</i> Contact</a>
+					<div class="forshare-drawer-separator"></div>
 					<?php
 						if ($user_type == 'guest')
 						{
@@ -176,9 +173,10 @@
 					<?php
 						} else {
 					?>
-					<a class="mdl-navigation__link" href="logout.php">Logout</a>
+					<a class="mdl-navigation__link" href="logout.php"><i class="material-icons item-icons">exit_to_app</i> Logout</a>
 					<?php
 						}
 					?>
 				</nav>
 			</div>
+			<div class="mdl-layout__content">
